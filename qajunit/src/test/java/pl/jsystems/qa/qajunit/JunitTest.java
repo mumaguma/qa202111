@@ -41,7 +41,6 @@ public class JunitTest {
     @RepeatedTest(5)
     @Tag("junit")
     @DisplayName("First junit test")
-    @Test
     public void firstTest() {
 
         assertEquals(2 + 3, 5);
@@ -51,6 +50,7 @@ public class JunitTest {
         assertEquals(STRING_TESTOWY,  "stringTestowy");
 
     }
+
 
     @Order(3)
     @Disabled("Jira task: 15684")
