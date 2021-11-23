@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+
+    triggers {
+        cron('40 15 * * *')
+    }
+
+    stages {
+        stage('checkout') {
+            steps {
+                git url: 'https://github.com/Test112021/qa.git'
+                branch: 'develop'
+            }
+        }
+        stage('build') {
+            steps {
+                sh "mvn clean test"
+            }
+        }
+    }
+
+    post {
+        always {
+            allure([
+                     includeProperties: false,
+                     jdk: '',
+                     properties: [[key: 'allure.issues.tracker.pattern', value: 'http://tracker.company.com/%s'],
+                     [key: 'allure.tests.management.pattern', value: 'http://tms.company.com/%s'],
+                     ],
+                     reportBuildPolicy: 'ALWAYS',
+                     results: [[path: 'qajunit/target/allure-results']]
+            ])
+
+        }
+    }
+}
