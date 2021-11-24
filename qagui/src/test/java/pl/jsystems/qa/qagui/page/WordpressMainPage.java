@@ -12,4 +12,8 @@ public class WordpressMainPage extends BasePage {
 
     public WebElement logIn = driver.findElement(By.linkText("Log In"));
 
+    public void clickLogIn() {
+        click(logIn, 5);
+    }
+
 }

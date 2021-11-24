@@ -18,9 +18,17 @@ public class LoginPage extends BasePage {
     public WebElement passConfirmButton = driver.findElement(By.className("login__form-action"));
 
     public void enterUser(String userName) {
+        visibilityOfElementLocated(By.id("usernameOrEmail"), 3);
         this.userLogInput.click();
         this.userLogInput.clear();
         this.userLogInput.sendKeys(userName);
+    }
+
+    public void enterPass(String pass) {
+        visibilityOfElementLocated(By.id("password"), 3);
+        this.passLogInput.click();
+        this.passLogInput.clear();
+        this.passLogInput.sendKeys(pass);
     }
 
 }
