@@ -7,8 +7,8 @@ pipeline {
 
     parameters {
         choice(name: 'ENVIRONMENT', choices: ['dev', 'test', 'stage', 'prd'], description: 'Choose environment.')
-        choice(name: 'TAG', choices: ['FrontEnd', 'smoke', 'Login', 'Notification', 'Keys_Action', 'Scroll', 'Alert', 'Frame', 'Window'], description: 'Choose tag.')
-        choice(name: 'EX_TAG', choices: ['','smoke', 'Login', 'Notification', 'Keys_Action', 'Scroll', 'Alert', 'Frame', 'Window'], description: 'Choose tag.')
+        choice(name: 'TAG', choices: ['', 'FrontEnd', 'smoke', 'Login', 'Notification', 'Keys_Action', 'Scroll', 'Alert', 'Frame', 'Window'], description: 'Choose tag.')
+        choice(name: 'EX_TAG', choices: ['', 'FrontEnd','smoke', 'Login', 'Notification', 'Keys_Action', 'Scroll', 'Alert', 'Frame', 'Window'], description: 'Choose tag.')
         choice(name: 'BROWSER', choices: ['firefox','chrome', 'edge'], description: 'Choose browser.')
         choice(name: 'MACHINE', choices: ['remote','local'], description: 'Choose machine.')
         choice(name: 'CUCUMBER_TAG', choices: ['@BDD', '@BDD-PARAM', '@Login', '@wordpress', '@userpanel', '@website', '@website2', '@website3'], description: 'Choose machine.')
