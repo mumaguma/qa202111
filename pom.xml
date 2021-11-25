@@ -12,6 +12,7 @@
     <modules>
         <module>qajunit</module>
         <module>qagui</module>
+        <module>qaapi</module>
     </modules>
 
     <dependencyManagement>
@@ -131,6 +132,12 @@
                         <artifactId>jackson-module-jaxb-annotations</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>io.rest-assured</groupId>
+                <artifactId>rest-assured</artifactId>
+                <version>4.4.0</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
