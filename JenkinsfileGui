@@ -12,7 +12,6 @@ pipeline {
         choice(name: 'BROWSER', choices: ['firefox','chrome', 'edge'], description: 'Choose browser.')
         choice(name: 'MACHINE', choices: ['remote','local'], description: 'Choose machine.')
         string(name: 'REMOTE_URL', defaultValue: 'http://172.24.192.1:4444/wd/hub', description: 'Remote selenium grid.')
-
     }
 
     stages {

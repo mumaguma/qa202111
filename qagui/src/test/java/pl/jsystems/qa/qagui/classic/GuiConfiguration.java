@@ -1,4 +1,4 @@
-package pl.jsystems.qa.qagui;
+package pl.jsystems.qa.qagui.classic;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
@@ -11,6 +11,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import pl.jsystems.qa.qagui.GuiConfig;
 
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
