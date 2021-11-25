@@ -4,15 +4,19 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Paths;
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 public class GuiConfiguration {
 
@@ -32,7 +36,7 @@ public class GuiConfiguration {
 //        driver = new ChromeDriver();
 
         setUpMachine();
-        setUpDriver();
+        confDriver();
 
     }
 
@@ -44,15 +48,25 @@ public class GuiConfiguration {
         }
     }
 
-    private void setUpRemoteConfiguration() {
+    private WebDriver setUpRemoteConfiguration() {
+        setUpRemoteDriver();
+        return driver;
+    }
 
+    private void setUpRemoteDriver() {
+        try {
+            driver = new RemoteWebDriver(new URL(GuiConfig.REMOTE_URL),
+                    new DesiredCapabilities(GuiConfig.BROWSER, "", Platform.LINUX));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setUpLocalConfiguration() {
         driver = setWebDriver();
     }
 
-    private void setUpDriver() {
+    private void confDriver() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
         driver.manage().deleteAllCookies();
