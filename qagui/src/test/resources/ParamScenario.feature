@@ -1,4 +1,4 @@
-@BDD-PARAM
+@FrontEnd @BDD @BDD-PARAM
 Feature: Parameter tests
 
   @website
