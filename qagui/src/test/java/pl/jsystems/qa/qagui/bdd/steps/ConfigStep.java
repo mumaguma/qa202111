@@ -1,16 +1,19 @@
-package pl.jsystems.qa.qagui;
+package pl.jsystems.qa.qagui.bdd.steps;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Platform;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import pl.jsystems.qa.qagui.GuiConfig;
 
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
@@ -18,26 +21,21 @@ import java.net.URL;
 import java.nio.file.Paths;
 import java.time.Duration;
 
-public class GuiConfiguration {
+public class ConfigStep {
 
     protected WebDriver driver;
 
-    @BeforeAll
-    public static void setUpAll() {
+    @Before
+    public void setUp() {
         WebDriverManager.chromedriver().setup();
         WebDriverManager.edgedriver().setup();
         WebDriverManager.firefoxdriver().setup();
     }
 
-    @BeforeEach
-    public void setUp() {
-//        driver = new FirefoxDriver();
-//        driver = new EdgeDriver();
-//        driver = new ChromeDriver();
-
+    public WebDriver setUpWebDriver() {
         setUpMachine();
         confDriver();
-
+        return driver;
     }
 
     private void setUpMachine() {
@@ -111,8 +109,22 @@ public class GuiConfiguration {
         }
     }
 
-    @AfterEach
-    public void tearDown() {
+    @After
+    public void tearDown(Scenario scenario) {
+        System.out.println("=========================== @After Cucumber Test  =======================================");
+        String status;
+        if(!scenario.isFailed()) {
+            status = "( ͡° ͜ʖ ͡°)";
+//            status = "++++++++++";
+            scenario.log("Scenario passed");
+        } else {
+            status = "(✖╭╮✖)";
+//            status = "-------------";
+            scenario.attach(((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES),"images/png", scenario.getName());
+            scenario.log("Scenario failed");
+        }
+        System.out.println("\n"+status+" End of: " + scenario.getName() + " scenario.");
         driver.quit();
+        driver = null;
     }
 }

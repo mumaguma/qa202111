@@ -1,8 +1,11 @@
-package pl.jsystems.qa.qagui;
+package pl.jsystems.qa.qagui.classic;
 
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
+@Tags({@Tag("FrontEnd"), @Tag("katalon")})
 public class KatalonTest extends GuiConfiguration {
 
     @Test

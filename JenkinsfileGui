@@ -11,8 +11,8 @@ pipeline {
         choice(name: 'EX_TAG', choices: ['','smoke', 'Login', 'Notification', 'Keys_Action', 'Scroll', 'Alert', 'Frame', 'Window'], description: 'Choose tag.')
         choice(name: 'BROWSER', choices: ['firefox','chrome', 'edge'], description: 'Choose browser.')
         choice(name: 'MACHINE', choices: ['remote','local'], description: 'Choose machine.')
+        choice(name: 'CUCUMBER_TAG', choices: ['@BDD','@Login', '@wordpress', @userpanel], description: 'Choose machine.')
         string(name: 'REMOTE_URL', defaultValue: 'http://172.24.192.1:4444/wd/hub', description: 'Remote selenium grid.')
-
     }
 
     stages {
@@ -23,7 +23,7 @@ pipeline {
         }
         stage('build') {
             steps {
-                sh "mvn clean test -Dgroups=${params.TAG} -DexcludedGroups=${params.EX_TAG} -DENVIRONMENT=${params.ENVIRONMENT} -DBROWSER=${params.BROWSER} -DMACHINE=${params.MACHINE} -DREMOTE_URL=${params.REMOTE_URL} -pl qagui"
+                sh "mvn clean test -Dgroups=${params.TAG} -DexcludedGroups=${params.EX_TAG} -DENVIRONMENT=${params.ENVIRONMENT} -DBROWSER=${params.BROWSER} -DMACHINE=${params.MACHINE} -DREMOTE_URL=${params.REMOTE_URL} -Dcucumber.filter.tags=${params.CUCUMBER_TAG} -pl qagui"
             }
         }
     }
@@ -39,6 +39,7 @@ pipeline {
                      reportBuildPolicy: 'ALWAYS',
                      results: [[path: 'qagui/target/allure-results']]
             ])
+            cucumber buildStatus: 'UNSTABLE', failedFeaturesNumber: -1, failedScenariosNumber: -1, failedStepsNumber: -1, fileIncludePattern: '**/*cucumber.json', jsonReportDirectory: 'qagui/target/', pendingStepsNumber: -1, skippedStepsNumber: -1, sortingMethod: 'ALPHABETICAL', undefinedStepsNumber: -1
 
         }
     }
