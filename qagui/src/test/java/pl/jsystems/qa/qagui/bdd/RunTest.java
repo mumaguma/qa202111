@@ -44,15 +44,15 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 //        ,
         "Login"
 //        ,
-//        "@wordpress"
+//        "wordpress"
 //        ,
-//        "@userpanel"
+//        "userpanel"
 //        ,
-//        "@website"
+//        "website"
 //        ,
-//        "@website2"
+//        "website2"
 //        ,
-//        "@website3"
+//        "website3"
 })
 public class RunTest {
 
