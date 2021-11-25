@@ -11,19 +11,19 @@ import org.junit.runner.RunWith;
         plugin = {"pretty", "summary", "html:target/cucumber/report.html", "json: target/cucumber.json",
         "junit:target/cucumber.xml", "rerun:target/rerun.txt"},
         tags =
-                "BDD "
-                        +
-                        "and "
-                        +
-                        "@Login "
-                        +
-                        "and "
-                        +
-                        "@wordpress "
-                        +
-                        "and "
-                        +
-                        "@userpanel"
+                "@BDD "
+//                        +
+//                        "and "
+//                        +
+//                        "@Login "
+//                        +
+//                        "and "
+//                        +
+//                        "@wordpress "
+//                        +
+//                        "and "
+//                        +
+//                        "@userpanel"
 )
 public class RunTest {
 
