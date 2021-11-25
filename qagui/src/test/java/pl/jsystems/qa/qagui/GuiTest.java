@@ -14,14 +14,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pl.jsystems.qa.qagui.page.*;
 
 import java.time.Duration;
+import java.util.Set;
 
 import static com.google.common.truth.Truth.assertThat;
-import static java.lang.Thread.sleep;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@DisplayName("Frontend test")
 public class GuiTest extends GuiConfig {
 
+    @DisplayName("login test")
     @Test
     public void lgInTest() {
         driver.get("https://wordpress.com/");
@@ -70,6 +72,7 @@ public class GuiTest extends GuiConfig {
     MyProfilePage myProfilePage;
     NotificationPage notificationPage;
 
+    @DisplayName("login test, cleaned")
     @Test
     public void lgIn() {
         driver.get("https://wordpress.com/");
@@ -93,6 +96,7 @@ public class GuiTest extends GuiConfig {
 
     }
 
+    @DisplayName("Notification")
     @Test
     public void notification() {
         driver.get("https://wordpress.com/");
@@ -154,10 +158,6 @@ public class GuiTest extends GuiConfig {
 
 
 
-    }
-
-
-    private void assertFalse(boolean selected) {
     }
 
     private void logIn() {
@@ -225,6 +225,7 @@ public class GuiTest extends GuiConfig {
         assertThat(title).isEqualTo("title");
     }
 
+    @DisplayName("Frame")
     @Test
     public void frameTest(){
         String contactUrl = "http://www.testdiary.com/training/selenium/selenium-test-page/";
@@ -248,6 +249,62 @@ public class GuiTest extends GuiConfig {
         }
 
         driver.switchTo().parentFrame();
+    }
+
+    @DisplayName("Window test")
+    @Test
+    public void windowTest() {
+
+        String firstPageWindow = null;
+        String secondWindow = null;
+
+        String urlDiary = "http://www.testdiary.com/training/selenium/selenium-test-page/";
+
+        String openWindow = "Open page in a new window";
+        By openWindowLink = By.linkText(openWindow);
+
+        driver.navigate().to(urlDiary);
+
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(openWindowLink));
+
+
+        WebElement hyperlinkElement = driver.findElement(openWindowLink);
+
+        firstPageWindow = driver.getWindowHandle();
+
+        int hyperlinkElementYCoord = hyperlinkElement.getLocation().getY();
+        int hyperlinkElementXCoord = hyperlinkElement.getLocation().getX();
+
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+
+        jsExecutor.executeScript("window.scrollBy(" + hyperlinkElementXCoord + "," + hyperlinkElementYCoord + ")", "");
+
+        wait.until(ExpectedConditions.elementToBeClickable(openWindowLink));
+
+        hyperlinkElement.click();
+
+        Set<String> windowHandles = driver.getWindowHandles();
+
+        for (String window: windowHandles) {
+            if (!firstPageWindow.equals(window)){
+                secondWindow = window;
+            }
+        }
+
+        driver.switchTo().window(secondWindow);
+
+        System.out.println(secondWindow.toString());
+        System.out.println(firstPageWindow.toString());
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("testpagelink")));
+
+        driver.switchTo().window(secondWindow).close();
+        driver.switchTo().window(firstPageWindow);
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(openWindowLink));
+
+
     }
 }
 
