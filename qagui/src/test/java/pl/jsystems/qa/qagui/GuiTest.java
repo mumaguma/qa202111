@@ -17,12 +17,13 @@ import java.util.Set;
 import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static pl.jsystems.qa.qagui.GuiConfig.*;
 
 @Tags({@Tag("FrontEnd"), @Tag("smoke")})
 @DisplayName("Frontend test")
-public class GuiTest extends GuiConfig {
+public class GuiTest extends GuiConfiguration {
 
-    @Tag("Login")
+    @Tag("Log")
     @DisplayName("login test")
     @Test
     public void lgInTest() {
@@ -76,23 +77,24 @@ public class GuiTest extends GuiConfig {
     @DisplayName("login test, cleaned")
     @Test
     public void lgIn() {
-        driver.get("https://wordpress.com/");
+//        driver.get("https://wordpress.com/");
+        driver.get(BASE_URL);
         wordpressMainPage = new WordpressMainPage(driver);
         wordpressMainPage.clickLogIn();
 
         loginPage = new LoginPage(driver);
-        loginPage.enterUser("automation112021");
+        loginPage.enterUser(LOGIN);
         loginPage.userContinueButton.click();
-        loginPage.enterPass("Test112021");
+        loginPage.enterPass(PASSWORD);
         loginPage.passConfirmButton.click();
         mainUserPage = new MainUserPage(driver);
         assertTrue(mainUserPage.avatar.isDisplayed());
 
-        driver.get("https://wordpress.com/me");
+        driver.get(BASE_URL + "/me");
 
         myProfilePage = new MyProfilePage(driver);
 
-        assertThat(myProfilePage.getProfileName()).isEqualTo("automation112021");
+        assertThat(myProfilePage.getProfileName()).isEqualTo(LOGIN);
         myProfilePage.clickLogOutButton();
 
     }
@@ -101,12 +103,12 @@ public class GuiTest extends GuiConfig {
     @DisplayName("Notification")
     @Test
     public void notification() {
-        driver.get("https://wordpress.com/");
+        driver.get(BASE_URL);
         logIn();
         mainUserPage = new MainUserPage(driver);
         assertTrue(mainUserPage.avatar.isDisplayed());
 
-        driver.get("https://wordpress.com/me");
+        driver.get(BASE_URL + "/me");
 
         myProfilePage = new MyProfilePage(driver);
         
