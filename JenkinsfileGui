@@ -11,7 +11,7 @@ pipeline {
         choice(name: 'EX_TAG', choices: ['','smoke', 'Login', 'Notification', 'Keys_Action', 'Scroll', 'Alert', 'Frame', 'Window'], description: 'Choose tag.')
         choice(name: 'BROWSER', choices: ['firefox','chrome', 'edge'], description: 'Choose browser.')
         choice(name: 'MACHINE', choices: ['remote','local'], description: 'Choose machine.')
-        string(name: 'REMOTE_URL' defaultValue: 'http://172.24.192.1:4444/wd/hub', description: 'Remote selenium grid.
+        string(name: 'REMOTE_URL', defaultValue: 'http://172.24.192.1:4444/wd/hub', description: 'Remote selenium grid.
 
     }
 
