@@ -4,18 +4,18 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 
-import static pl.jsystems.qa.qaapi.author.config.ApiConfig.AZURE_BASE_PATH;
+import static pl.jsystems.qa.qaapi.author.config.ApiConfig.AZURE_BASE_URI;
 
 public class AzureSpecification {
 
-    private static final String BASE_URI = "api/v1/";
+    private static final String BASE_PATH = "/api/v1";
 
-    public RequestSpecification azureSpec() {
+    public static RequestSpecification azureSpec() {
         return new RequestSpecBuilder()
                 .setContentType(ContentType.JSON)
                 .addHeader("Authorization", "ApiKey")
-                .setBasePath(AZURE_BASE_PATH)
-                .setBaseUri(BASE_URI)
+                .setBaseUri(AZURE_BASE_URI)
+                .setBasePath(BASE_PATH)
                 .build();
     }
 }

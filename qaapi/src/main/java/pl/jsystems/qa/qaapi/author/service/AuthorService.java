@@ -12,8 +12,6 @@ public class AuthorService {
     private static final String AUTHORS = "/Authors";
     private static final String AUTHORS_BY_ID = "/Authors/{id}";
 
-    AzureSpecification azureSpecification = new AzureSpecification();
-
     public Author getAuthorById(int id) {
         return getAuthorByIdResponse(id)
                 .then()
@@ -40,7 +38,7 @@ public class AuthorService {
     public Response getAuthorByIdResponse(int id) {
         return RestAssured
                 .given()
-                .spec(azureSpecification.azureSpec())
+                .spec(AzureSpecification.azureSpec())
 //                .get("https://fakerestapi.azurewebsites.net//Authors/{id}", id)
                 .get(AUTHORS_BY_ID, id)
                 .andReturn();
@@ -72,7 +70,7 @@ public class AuthorService {
     public Response getAuthorsResponse() {
         return RestAssured
                 .given()
-                .spec(azureSpecification.azureSpec())
+                .spec(AzureSpecification.azureSpec())
 //                        .get("https://fakerestapi.azurewebsites.net/api/v1/Authors")
                 .get(AUTHORS)
                 .andReturn();
