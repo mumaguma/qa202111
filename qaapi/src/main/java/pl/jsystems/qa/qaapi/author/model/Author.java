@@ -1,7 +1,13 @@
 package pl.jsystems.qa.qaapi.author.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 
+@Getter
+@Builder
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Author {
 
     @JsonProperty(value = "id", required = true)
@@ -12,20 +18,4 @@ public class Author {
     public String firstName;
     @JsonProperty(value = "lastName", required = true)
     public String lastName;
-
-    public long getId() {
-        return id;
-    }
-
-    public long getIdBook() {
-        return idBook;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
 }
