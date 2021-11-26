@@ -3,6 +3,7 @@ package pl.jsystems.qa.qaapi;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pl.jsystems.qa.qaapi.author.model.Author;
 import pl.jsystems.qa.qaapi.author.model.AzureError;
@@ -15,6 +16,7 @@ import java.util.Map;
 import static com.google.common.truth.Truth.assertThat;
 import static org.hamcrest.Matchers.*;
 
+@Tag("Api")
 public class ApiTest {
 
     AuthorService authorService;
