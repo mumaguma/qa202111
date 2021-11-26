@@ -3,10 +3,16 @@ package pl.jsystems.qa.qaapi.author.service;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import pl.jsystems.qa.qaapi.author.model.Author;
+import pl.jsystems.qa.qaapi.author.spec.AzureSpecification;
 
 import java.util.List;
 
 public class AuthorService {
+
+    private static final String AUTHORS = "/Authors";
+    private static final String AUTHORS_BY_ID = "/Authors/{id}";
+
+    AzureSpecification azureSpecification = new AzureSpecification();
 
     public Author getAuthorById(int id) {
         return getAuthorByIdResponse(id)
@@ -32,10 +38,11 @@ public class AuthorService {
     }
 
     public Response getAuthorByIdResponse(int id) {
-        return
-                RestAssured
+        return RestAssured
                 .given()
-                .get("https://fakerestapi.azurewebsites.net/api/v1/Authors/{id}", id)
+                .spec(azureSpecification.azureSpec())
+//                .get("https://fakerestapi.azurewebsites.net//Authors/{id}", id)
+                .get(AUTHORS_BY_ID, id)
                 .andReturn();
     }
 
@@ -63,11 +70,13 @@ public class AuthorService {
     }
 
     public Response getAuthorsResponse() {
-        return
-                RestAssured
-                        .given()
-                        .get("https://fakerestapi.azurewebsites.net/api/v1/Authors")
-                        .andReturn();
+        return RestAssured
+                .given()
+                .spec(azureSpecification.azureSpec())
+//                        .get("https://fakerestapi.azurewebsites.net/api/v1/Authors")
+                .get(AUTHORS)
+                .andReturn();
     }
+
 
 }
