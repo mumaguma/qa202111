@@ -1,10 +1,10 @@
-package pl.jsystems.qa.qaapi.author.spec;
+package pl.jsystems.qa.qaapi.spec;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 
-import static pl.jsystems.qa.qaapi.author.config.ApiConfig.AZURE_BASE_URI;
+import static pl.jsystems.qa.qaapi.config.ApiConfig.AZURE_BASE_URI;
 
 public class AzureSpecification {
 

@@ -3,7 +3,7 @@ package pl.jsystems.qa.qaapi.author.service;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import pl.jsystems.qa.qaapi.author.model.Author;
-import pl.jsystems.qa.qaapi.author.spec.AzureSpecification;
+import pl.jsystems.qa.qaapi.spec.AzureSpecification;
 
 import java.util.List;
 

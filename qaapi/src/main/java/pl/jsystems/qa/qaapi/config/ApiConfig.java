@@ -1,4 +1,4 @@
-package pl.jsystems.qa.qaapi.author.config;
+package pl.jsystems.qa.qaapi.config;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
