@@ -7,11 +7,10 @@ pipeline {
 
     parameters {
         choice(name: 'ENVIRONMENT', choices: ['dev', 'test', 'stage', 'prd'], description: 'Choose environment.')
-        choice(name: 'TAG', choices: ['FrontEnd', 'smoke', 'Login', 'Notification', 'Keys_Action', 'Scroll', 'Alert', 'Frame', 'Window'], description: 'Choose tag.')
-        choice(name: 'EX_TAG', choices: ['','smoke', 'Login', 'Notification', 'Keys_Action', 'Scroll', 'Alert', 'Frame', 'Window'], description: 'Choose tag.')
+        choice(name: 'TAG', choices: ['', 'FrontEnd', 'smoke', 'Login', 'Notification', 'Keys_Action', 'Scroll', 'Alert', 'Frame', 'Window', 'BDD', 'BDD-PARAM', 'Login', 'wordpress', 'userpanel', 'website', 'website2', 'website3'], description: 'Choose tag.')
+        choice(name: 'EX_TAG', choices: ['', 'FrontEnd','smoke', 'Login', 'Notification', 'Keys_Action', 'Scroll', 'Alert', 'Frame', 'Window', 'BDD', 'BDD-PARAM', 'Login', 'wordpress', 'userpanel', 'website', 'website2', 'website3'], description: 'Choose tag.')
         choice(name: 'BROWSER', choices: ['firefox','chrome', 'edge'], description: 'Choose browser.')
         choice(name: 'MACHINE', choices: ['remote','local'], description: 'Choose machine.')
-        choice(name: 'CUCUMBER_TAG', choices: ['@BDD', '@BDD-PARAM', '@Login', '@wordpress', '@userpanel', '@website', '@website2', '@website3'], description: 'Choose machine.')
         string(name: 'REMOTE_URL', defaultValue: 'http://172.24.192.1:4444/wd/hub', description: 'Remote selenium grid.')
     }
 
@@ -23,7 +22,7 @@ pipeline {
         }
         stage('build') {
             steps {
-                sh "mvn clean test -Dgroups=${params.TAG} -DexcludedGroups=${params.EX_TAG} -DENVIRONMENT=${params.ENVIRONMENT} -DBROWSER=${params.BROWSER} -DMACHINE=${params.MACHINE} -DREMOTE_URL=${params.REMOTE_URL} -Dcucumber.filter.tags=${params.CUCUMBER_TAG} -pl qagui"
+                sh "mvn clean test -Dgroups=${params.TAG} -DexcludedGroups=${params.EX_TAG} -DENVIRONMENT=${params.ENVIRONMENT} -DBROWSER=${params.BROWSER} -DMACHINE=${params.MACHINE} -DREMOTE_URL=${params.REMOTE_URL} -pl qagui"
             }
         }
     }

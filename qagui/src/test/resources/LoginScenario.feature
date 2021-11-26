@@ -1,4 +1,4 @@
-@BDD
+@FrontEnd @BDD @BDD-NO-PARAM
 Feature: User Login
 
   @Login @wordpress @userpanel
